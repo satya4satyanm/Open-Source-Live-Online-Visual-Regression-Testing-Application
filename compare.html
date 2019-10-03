@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+    <head>
+<style>
+
+    #one, #two {
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    }
+    #one {
+        z-index: 2;
+    }
+    #two {
+        z-index: 4;
+    }
+    iframe {
+        width: 100%;
+        height: 15500px;
+    }
+    #fader {
+        position: fixed;
+        top: 70%;
+        left:30%;
+        background: #000;
+        width:40%;
+        height:70px;
+        z-index: 10;
+        margin: 0 auto;
+        padding: 30px;
+    }
+    .pname {
+        position: fixed;
+        top: 20%;
+        font-size: 30px;
+        font-weight: bold;
+        margin-left:150px;
+        color:red;
+    }
+
+    #txt2 {
+        top: 25%;
+    }
+</style>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+        $( function() {
+          $( "#slider" ).slider({
+                min: 0,
+                max: 100,
+                step: 1,
+                value: 100,
+                slide: function( event, ui ) {
+                    val = ui.value;
+                    jQuery('#two').css('opacity', val/100);
+                }
+            });
+
+
+
+            $("#btn").click(function () { 
+                $("#f1").attr("src", $("#u1").val());
+                $("#f2").attr("src", $("#u2").val());
+            });
+
+
+            $("#a1").on("keydown",function(){
+                $("#txt1").html($("#a1").val());
+            })
+            $("#a2").on("keydown",function(){
+                $("#txt2").html($("#a2").val());
+            })
+
+            $("#h2").change(function(){
+                $( "#two" ).toggle();
+            })
+
+
+
+
+
+
+
+
+
+
+
+            var int00; 
+
+$('#btnup').mousedown(function(){
+    int00 = setInterval(function() { repeatingfunction(); }, 50);
+}).mouseup(function() {
+    clearInterval(int00);
+});
+
+function repeatingfunction() {
+    t=$("#two").css("top");
+    t=t.split("px")[0];
+    t=Number(t)-1;
+    $("#two").css("top", t +"px");
+}
+      
+        
+        
+        var int01;
+        $('#btndown').mousedown(function(){
+    int01 = setInterval(function() { rd(); }, 50);
+}).mouseup(function() {
+    clearInterval(int01);
+});
+
+function rd() {
+    t=$("#two").css("top");
+    t=t.split("px")[0];
+    console.log(t);
+    t=Number(t)+1;
+    $("#two").css("top", t +"px");
+}
+        
+        
+
+
+
+
+        } );
+
+
+
+        </script>
+    </head>
+    <body>
+        <div id="one">
+
+         <iframe id="f1" src="" frameborder="0"></iframe>
+            <div id="txt1" class="pname">Prod Env</div>
+        </div>
+        <div id="two">
+
+         <iframe id="f2" src="" frameborder="0"></iframe>
+         <div id="txt2" class="pname">QA Env</div>
+        </div>
+        <div id="fader">
+            <div  style="color:#fff;margin-top:20px;user-select: none;">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hide</div>
+            <div  style="float:left;margin-bottom:5px;user-select: none;">
+                <input type="text" name="a1" id="a1" style="width:60px;float:left;" value="Prod Env"/> &nbsp;&nbsp;
+                <input type="text" name="u1" id="u1" style="width:120px;float:left;margin-left:10px;" value="http://www.livetoyourpassion.com"/> &nbsp;&nbsp;
+                <!--input type="checkbox" name="h1" id="h1" style="float:left;"/-->
+                <button name="btnup" id="btnup" style="float: left;margin-left:5px;">Up</button>
+                <button name="btndown" id="btndown" style="float: left;margin-left:5px;">Down</button>
+            </div>
+            <div  style="float:left;user-select: none;">
+                <input type="text" name="a2" id="a2" style="width:60px;float:left;" value="QA Env"/> &nbsp;&nbsp;
+                <input type="text" name="u2" id="u2" style="width:120px;float:left;margin-left:10px;" value="http://www.livetoyourpassion.com/blog"/> &nbsp;&nbsp;
+                <input type="checkbox" name="h2" id="h2" style="float:left;"/>
+                <button name="btn" id="btn" style="float: right;">Load</button>
+            </div>
+            <div id="slider" style="margin-top: -50px;"></div>
+        </div>
+        
+    </body>
+</html>
